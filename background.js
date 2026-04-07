@@ -35,9 +35,11 @@ async function getSession() {
   let session = data.session;
   // Auto-reset at midnight
   if (!session || session.date !== todayStr()) {
-    session = { date: todayStr(), totalSeconds: 0, blocked: false };
+    session = { date: todayStr(), totalSeconds: 0, siteSeconds: {}, blocked: false };
     await storageSet({ session });
   }
+  // Backwards compat: add siteSeconds if missing from an older session
+  if (!session.siteSeconds) session.siteSeconds = {};
   return session;
 }
 
@@ -83,7 +85,10 @@ async function handle(req) {
       if (!config.enabled || session.blocked) {
         return { blocked: session.blocked, enabled: config.enabled };
       }
-      session.totalSeconds += (req.seconds || 5);
+      const secs = req.seconds || 5;
+      const domain = req.domain || 'unknown';
+      session.totalSeconds += secs;
+      session.siteSeconds[domain] = (session.siteSeconds[domain] || 0) + secs;
       if (session.totalSeconds >= config.dailyLimit * 60) {
         session.blocked = true;
       }
@@ -132,8 +137,24 @@ async function handle(req) {
       return { success: true };
     }
 
+    case 'GET_DASHBOARD': {
+      const entries = Object.entries(session.siteSeconds || {})
+        .sort((a, b) => b[1] - a[1]);
+      const top9 = entries.slice(0, 9).map(([site, seconds]) => ({ site, seconds }));
+      const othersSeconds = entries.slice(9).reduce((sum, [, s]) => sum + s, 0);
+      return {
+        date: session.date,
+        totalSeconds: session.totalSeconds,
+        limitSeconds: config.dailyLimit * 60,
+        dailyLimit: config.dailyLimit,
+        top9,
+        othersSeconds,
+        blocked: session.blocked
+      };
+    }
+
     case 'RESET_DAY': {
-      const fresh = { date: todayStr(), totalSeconds: 0, blocked: false };
+      const fresh = { date: todayStr(), totalSeconds: 0, siteSeconds: {}, blocked: false };
       await storageSet({ session: fresh });
       return { success: true };
     }

@@ -24,6 +24,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('resetBtn')
     .addEventListener('click', onReset);
+
+  document.getElementById('dashboardBtn')
+    .addEventListener('click', () => {
+      window.open(chrome.runtime.getURL('dashboard.html'));
+    });
 });
 
 // ─── Refresh ──────────────────────────────────────────────────────────────────

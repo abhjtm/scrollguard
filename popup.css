@@ -341,3 +341,20 @@ body {
 
 .reset-btn:hover    { border-color: #ef4444; color: #ef4444; background: #fef2f2; }
 .reset-btn.pending  { border-color: #ef4444; color: #ef4444; background: #fef2f2; }
+
+.dashboard-btn {
+  width: 100%;
+  padding: 9px 16px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #4f46e5;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.2s;
+  margin-top: 6px;
+}
+
+.dashboard-btn:hover { background: #ede9fe; border-color: #a5b4fc; }

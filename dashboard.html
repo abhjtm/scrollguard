@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ScrollGuard — Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="page">
+
+    <header class="header">
+      <div class="header-left">
+        <span class="logo">ScrollGuard</span>
+        <span class="date" id="dateLabel"></span>
+      </div>
+      <div class="header-right">
+        <span class="blocked-pill hidden" id="blockedPill">BLOCKED TODAY</span>
+        <button class="reset-btn" id="resetBtn">Reset Today</button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- Summary cards -->
+      <div class="cards">
+        <div class="card">
+          <div class="card-label">Time Used</div>
+          <div class="card-value" id="usedTime">—</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Remaining</div>
+          <div class="card-value accent" id="leftTime">—</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Daily Limit</div>
+          <div class="card-value" id="limitVal">—</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Sites Visited</div>
+          <div class="card-value" id="siteCount">—</div>
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="progress-wrap">
+        <div class="progress-track">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-pct" id="progressPct">0%</span>
+      </div>
+
+      <!-- Chart + Table -->
+      <div class="content-grid">
+
+        <!-- Donut chart -->
+        <div class="chart-box">
+          <h2 class="section-title">Time Split</h2>
+          <div class="donut-wrap">
+            <canvas id="donutChart" width="220" height="220"></canvas>
+            <div class="donut-centre">
+              <div class="donut-total" id="donutTotal">0m</div>
+              <div class="donut-lbl">total</div>
+            </div>
+          </div>
+          <!-- Legend -->
+          <ul class="legend" id="legend"></ul>
+        </div>
+
+        <!-- Table -->
+        <div class="table-box">
+          <h2 class="section-title">Breakdown</h2>
+          <table class="site-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Site</th>
+                <th>Time</th>
+                <th>Share</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+          </table>
+          <p class="empty-state hidden" id="emptyState">
+            No data yet — visit a tracked site to start recording time.
+          </p>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -4,6 +4,12 @@ A Manifest V3 Chrome extension that enforces a **shared daily time budget** acro
 
 ---
 
+## Demo
+
+![ScrollGuard demo](screenvideo.gif)
+
+---
+
 ## Features
 
 - **Cumulative budget** — time spent across all tracked sites counts toward one shared daily limit

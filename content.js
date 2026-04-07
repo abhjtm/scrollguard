@@ -60,7 +60,7 @@
   function startTicker() {
     if (ticker) return;
     ticker = setInterval(() => {
-      chrome.runtime.sendMessage({ type: 'TICK', seconds: 5 }, res => {
+      chrome.runtime.sendMessage({ type: 'TICK', seconds: 5, domain: currentHost() }, res => {
         if (chrome.runtime.lastError || !res) return;
         if (res.blocked) {
           stopTicker();
