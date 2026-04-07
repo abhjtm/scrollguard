@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ScrollGuard</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Header -->
+    <header class="header">
+      <h1 class="logo">ScrollGuard</h1>
+      <label class="switch" title="Enable / disable tracking">
+        <input type="checkbox" id="toggleEnabled" checked>
+        <span class="track"><span class="thumb"></span></span>
+      </label>
+    </header>
+
+    <!-- Stats -->
+    <section class="stats" id="statsSection">
+      <div class="time-grid">
+        <div class="time-cell">
+          <span class="time-num" id="usedTime">0m 00s</span>
+          <span class="time-lbl">used today</span>
+        </div>
+        <div class="divider"></div>
+        <div class="time-cell">
+          <span class="time-num accent" id="leftTime">10m 00s</span>
+          <span class="time-lbl">remaining</span>
+        </div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="blocked-pill hidden" id="blockedPill">BLOCKED FOR TODAY</div>
+    </section>
+
+    <!-- Daily Limit -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">Daily Limit</span>
+        <span class="limit-display"><span id="limitVal">10</span> min</span>
+      </div>
+      <input type="range" id="limitSlider" class="slider" min="1" max="120" value="10">
+      <div class="limit-hints">
+        <span>1 min</span>
+        <span>120 min</span>
+      </div>
+    </section>
+
+    <!-- Tracked Sites -->
+    <section class="section">
+      <div class="section-header">
+        <span class="section-title">Tracked Sites</span>
+        <span class="site-count" id="siteCount">8</span>
+      </div>
+      <ul class="site-list" id="siteList"></ul>
+      <div class="add-row">
+        <input
+          type="text"
+          id="newSiteInput"
+          class="text-input"
+          placeholder="Add site (e.g. reddit.com)"
+          autocomplete="off"
+          spellcheck="false"
+        >
+        <button class="add-btn" id="addSiteBtn" title="Add site">+</button>
+      </div>
+      <p class="error-hint hidden" id="siteError">Enter a valid domain (e.g. example.com)</p>
+    </section>
+
+    <!-- Reset -->
+    <section class="section bottom-section">
+      <button class="reset-btn" id="resetBtn">Reset Today's Usage</button>
+    </section>
+
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
