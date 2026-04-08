@@ -6,7 +6,11 @@ A Manifest V3 Chrome extension that enforces a **shared daily time budget** acro
 
 ## Demo
 
+### GIF
 ![ScrollGuard demo](screenvideo.gif)
+
+### YouTube
+[![YouTube link](https://img.youtube.com/vi/ZbTr48dW0xI/0.jpg)](https://www.youtube.com/watch?v=ZbTr48dW0xI)
 
 ---
 
